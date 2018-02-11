@@ -5,32 +5,34 @@ git_source(:github) do |repo_name|
   "https://github.com/#{repo_name}.git"
 end
 
-
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '~> 5.1.4'
 
 # #1
 group :production do
-# Use pg as the production database for Active Record
+  # Use pg as the production database for Active Record
   gem 'pg'
+  gem 'rails_12factor'
 end
-
-gem 'rails_12factor', group: :production
 
 # #2
 group :development do
-# Use sqlite3 as the development database for Active Record
+  # Use sqlite3 as the development database for Active Record
   gem 'sqlite3'
+  gem 'pry-rails'
+end
+
+group :development, :test do
+  gem 'rspec-rails', '~> 3.0'
+  gem 'rails-controller-testing'
 end
 
 # Use Puma as the app server
-gem 'puma', '~> 3.7'
+gem 'puma', '~> 3.0'
 # Use SCSS for stylesheets
 gem 'sass-rails', '~> 5.0'
 # Use Uglifier as compressor for JavaScript assets
 gem 'uglifier', '>= 1.3.0'
-# See https://github.com/rails/execjs#readme for more supported runtimes
-# gem 'therubyracer', platforms: :ruby
 
 # Use jquery as the JavaScript library
 gem 'jquery-rails'
@@ -41,14 +43,9 @@ gem 'jbuilder', '~> 2.5'
 
 gem 'thor', '0.20.0'
 
-gem 'bootstrap-sass'
-
-group :development, :test do
-  gem 'rspec-rails', '~> 3.0'
-  gem 'rails-controller-testing'
-end
+gem 'bootstrap-sass', '~> 3.2.0'
+gem 'autoprefixer-rails'
 
 group :development do
-  gem 'listen', '>= 3.0.5', '< 3.2'
+  gem 'listen', '~> 3.0.5'
 end
-
