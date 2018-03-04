@@ -1,0 +1,10 @@
+<h4>Add a comment</h4>
+<!-- Create a form for a post and comment because comments are shallw nested under posts -->
+<%= form_for [post, comment] do |f| %>
+  <div class="form-group">
+<!-- Create a screen reader label -->
+    <%= f.label :body, class: 'sr-only' %>
+    <%= f.text_field :body, class: 'form-control', placeholder: "Enter a new comment" %>
+  </div>
+  <%= f.submit "Submit Comment", class: 'btn btn-default pull-right' %>
+<% end %>

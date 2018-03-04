@@ -7,6 +7,14 @@
 <div class="row">
   <div class="col-md-8">
     <p><%= @post.body %></p>
+    <div>
+      <h3>Comments</h3>
+      <%= render @post.comments %>
+    </div>
+    <% if current_user %>
+    <%= render 'comments/form', comment: Comment.new, post: @post %>
+    <% end %>
+</div>    
   </div>
   <% if user_is_authorized_for_posts?(@post) %>
     <div class="col-md-4">
@@ -14,18 +22,4 @@
       <%= link_to "Delete Post", [@post.topic, @post], method: :delete, class: 'btn btn-danger', data: {confirm: 'Are you sure you want to delete this post?'} %>
     </div>
   <% end %>
-</div>
-</br>
-<h3>Comments</h3>
-<div class="row">
-  <div class="col-md-8">
-    <% @post.comments.each do |c| %>
-      <div class="panel panel-default">
-        <div class="panel-body">
-          <small><i><%= time_ago_in_words(c.created_at) %> ago</i></small>
-          <p><%= c.body %></p>
-        </div>
-      </div>
-    <% end %>
-  </div>
 </div>
