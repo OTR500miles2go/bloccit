@@ -1,0 +1,8 @@
+You will now be notified of new comments to "<%= @post.title %>"
+<%= "=" * (@post.title.length + 45) %>
+
+By: <%= @post.user.name %> 
+
+<%= @post.body %>
+
+Visit online at: <%= topic_post_url(@post.topic, @post) %> 
