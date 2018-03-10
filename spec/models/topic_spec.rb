@@ -1,20 +1,16 @@
 require 'rails_helper'
 
- RSpec.describe Topic, type: :model do
-   let(:name) { RandomData.random_sentence }
-   let(:description) { RandomData.random_paragraph }
-   let(:public) { true }
-   let(:topic) { Topic.create!(name: name, description: description) }
+RSpec.describe Topic, type: :model do
+  let(:topic) { create(:topic) }
+  let(:public) { true }
 
- # #1
-   describe "attributes" do
-     it "has name, description, and public attributes" do
-       expect(topic).to have_attributes(name: name, description: description, public: public)
-     end
+  describe "attributes" do
+    it "responds to name and description attributes" do
+      expect(topic).to have_attributes(name: topic.name, description: topic.description)
+    end
 
- # #2
-     it "is public by default" do
-       expect(topic.public).to be(true)
-     end
-   end
- end
+    it "is public by default" do
+      expect(topic.public).to be(true)
+    end
+  end
+end
