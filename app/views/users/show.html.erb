@@ -13,14 +13,42 @@
         <small>
           <%= pluralize(@user.posts.count, 'post') %>,
           <%= pluralize(@user.comments.count, 'comment') %>
+          and
+          <%= pluralize(@user.favorites.count, 'favorite') %>
         </small>
       </div>
-    </div>
+    </div> 
   </div>
 </div>
 
-<h2>Posts</h2>
-<%= render @user.posts %>
+<% if user_has_posts_or_comments %>
+  <h2>Posts</h2>
+  <%= render @user.posts %>
 
-<h2>Comments</h2>
-<%= render @user.comments %>
+  <h2>Comments</h2>
+  <%= render @user.comments %>
+<% else %>
+  <br/><p><%= @user.name %> has not submitted any posts or comments yet.</p>
+<% end %>
+  
+<h2>Favorite Posts</h2>
+<% current_user.favorites.each do |favorite| %>
+ <div class="media">
+  <%= render partial: 'votes/voting', locals: { post: favorite.post } %>
+   <div class="media-body">
+    <h4 class="media-heading">
+     <% post_avatar_url = favorite.post.user.avatar_url(30) %>
+      <% if post_avatar_url %>
+        <div class="media-left">
+         <%= image_tag post_avatar_url, class: 'media-object' %>
+        </div>
+     <% end %>
+     <%= link_to favorite.post.title, topic_post_path(favorite.post.topic, favorite.post)  %>
+    </h4>
+    <small>
+    submitted <%= time_ago_in_words(favorite.post.created_at) %> ago by <%= favorite.post.user.name %> <br>
+    <%= favorite.post.comments.count %> Comments 
+    </small>
+   </div>
+ </div>
+<% end %>

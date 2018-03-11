@@ -82,4 +82,9 @@ RSpec.describe UsersController, type: :controller do
       expect(assigns(:user)).to eq(factory_user)
     end
   end
+
+  describe "user favorites" do
+    let(:factory_comment) { create(:comment) }
+    let(:factory_vote) { create(:vote) } 
+  end 
 end
